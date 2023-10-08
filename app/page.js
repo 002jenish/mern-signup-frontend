@@ -7,13 +7,14 @@ export default function Home() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [usernames, setUsernames] = useState([]);
+  const backendAPI = "https://mern-signup-backend.vercel.app/register";
 
   //<--------------------------------------------------------------------------------------------------->
   //fetch data from the database
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:8080/register");
+        const response = await fetch(backendAPI);
         if (response.ok) {
           const data = await response.json();
           setUsernames(data);
@@ -42,7 +43,7 @@ export default function Home() {
   //to handle the form default behaviour of refreshing
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:8080/register", {
+    const response = await fetch("backendAPI", {
       method: "POST",
       body: JSON.stringify(form),
       headers: {
